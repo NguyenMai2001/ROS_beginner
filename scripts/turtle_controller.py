@@ -6,8 +6,12 @@ from geometry_msgs.msg import Twist
 
 def pose_callback(msg: Pose):
     cmd = Twist()
-    cmd.linear.x = 2.0
-    cmd.angular.z = 1.0 
+    if msg.x >9.0 or msg.x <2.0:
+        cmd.linear.x = 1.0
+        cmd.angular.z = 1.4
+    else:
+        cmd.linear.x = 2.0
+        cmd.angular.z = 0
     pub.publish(cmd)
     # rospy.loginfo("(" + str(msg.x) + ", " + str(msg.y) + ")")
 
